@@ -15,12 +15,6 @@
 
 !SLIDE bullets
 
-# We&#8217;re all friends here
-
-* Any configuration management is better<br />than no configuration management.
-
-!SLIDE bullets
-
 # Blueprint
 
 * <https://github.com/devstructure/blueprint>
