@@ -84,7 +84,7 @@
 ## Never having to say you&#8217;re sorry
 
 * Reverse-engineer absolute state.
-* It doesn't matter when you install Blueprint.
+* It doesn&#8217;t matter when you install Blueprint.
 
 !SLIDE bullets
 
