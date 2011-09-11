@@ -17,10 +17,19 @@
 
 # Blueprint
 
-* <https://github.com/devstructure/blueprint>
+* [github.com/devstructure/blueprint](https://github.com/devstructure/blueprint)
 * Debian- or RPM-based Linux.
 * Python 2.6 or better.
 * BSD licensed.
+
+!SLIDE bullets
+
+# Blueprint
+
+* Figures out what you did.
+* Puts it in JSON in Git.
+* Generates code.
+* Deploys it.
 
 !SLIDE bullets
 
@@ -167,7 +176,7 @@ Common commands: list, create, show, diff, apply, destroy, git
 
 ## Packages
 
-* APT, Yum, RubyGems, PyPI, and PEAR.
+* APT, Yum, RubyGems, PyPI, PEAR, NPM.
 * Ignores the &#8220;base system&#8221; by default.
 
 !SLIDE bullets
@@ -205,6 +214,34 @@ Common commands: list, create, show, diff, apply, destroy, git
 
 * `blueprint show foo | less`
 * Show the JSON representation.
+
+!SLIDE bullets smaller
+
+<pre>{
+ "files": {
+  "/etc/apt/sources.list.d/devstructure.list": {
+   "content": "deb http://packages.devstructure.com natty main\n",
+   "encoding": "plain",
+   "group": "root",
+   "mode": "100644",
+   "owner": "root"
+  }
+ },
+ "packages": {
+  "apt": {
+   "openssh-server": ["1:5.8p1-1ubuntu3"],
+  }
+ },
+ "services": {
+  "sysvinit": {
+   "ssh": {
+    "packages": {
+     "apt": ["openssh-server"]
+    }
+   }
+  }
+ }
+}</pre>
 
 !SLIDE bullets
 
@@ -333,8 +370,7 @@ end
 package('openssh-server') { version '1:5.8p1-1ubuntu3' }
 service('ssh') do
   action [:enable, :start]
-  subscribes :restart,
-    resources('package[openssh-server]')
+  subscribes :restart, resources('package[openssh-server]')
 end</pre>
 
 !SLIDE bullets
