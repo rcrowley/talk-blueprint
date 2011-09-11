@@ -4,7 +4,7 @@
 
 ## Configuration management for busy people
 
-* [rcrowley.org/talks/sf-devops-2011-08-22/](http://rcrowley.org/talks/sf-devops-2011-08-22/)
+* [rcrowley.org/talks/sf-python-2011-09-14/](http://rcrowley.org/talks/sf-python-2011-09-14/)
 
 !SLIDE bullets
 
@@ -377,13 +377,12 @@ sh "$(ls)"</pre>
 
 # Future work
 
-* More love for the RedHat ecosystem.
-* Package managers: `goinstall`, NPM.
+* Modularity and inheritance.
 * Service supervisors: Runit, Monit, `systemd`.
 
 !SLIDE bullets
 
 # Thank you
 
-* <https://github.com/devstructure/blueprint>
+* [rcrowley.org/talks/sf-python-2011-09-14/](http://rcrowley.org/talks/sf-python-2011-09-14/)
 * <richard@devstructure.com> or [@rcrowley](https://twitter.com/rcrowley)
