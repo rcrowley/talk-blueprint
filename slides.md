@@ -59,53 +59,8 @@
 
 ## Whole-stack configuration management
 
-* APT, Yum, RubyGems, PyPI, and PEAR.
+* APT, Yum, RubyGems, PyPI, PEAR, NPM.
 * `/etc` and `/usr/local`.
-
-!SLIDE bullets
-
-# Philosophy
-
-## Idempotent everything 
-
-* No diffing/patching.
-* &#8220;Compliance.&#8221;
-
-!SLIDE bullets
-
-# Philosophy
-
-## Gently encourage The Right Way
-
-* The UNIX Way.
-* The Debian Way or The RedHat Way.
-
-!SLIDE bullets
-
-# Philosophy
-
-## Never having to say you&#8217;re sorry
-
-* Reverse-engineer absolute state.
-* It doesn&#8217;t matter when you install Blueprint.
-
-!SLIDE bullets
-
-# Philosophy
-
-## Simple file formats
-
-* JSON.
-* Tarballs.
-
-!SLIDE bullets
-
-# Philosophy
-
-## UNIX man pages
-
-* [`blueprint-create`(1)](http://devstructure.github.com/blueprint/blueprint-create.1.html)
-* [`blueprint`(5)](http://devstructure.github.com/blueprint/blueprint.5.html)
 
 !SLIDE bullets
 
