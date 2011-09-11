@@ -1,4 +1,4 @@
-set :remote, "/var/www/sf-devops-2011-08-22"
+set :remote, "/var/www/sf-python-2011-09-14"
 
 role :www, "root@rcrowley.org"
 
