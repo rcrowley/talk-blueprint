@@ -59,7 +59,7 @@
 
 ## Whole-stack configuration management
 
-* APT, Yum, RubyGems, PyPI, and PEAR.
+* APT, Yum, RubyGems, PyPI, PEAR, NPM.
 * `/etc` and `/usr/local`.
 
 !SLIDE bullets
