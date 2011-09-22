@@ -205,7 +205,7 @@ fpm -s dir -t deb -n ruby -v 1.9.2-p180 -C /tmp/installdir \
 
 ## Ruby itself
 
-* Run your own Debian archive
+* Put it in your own Debian archive.
 * [github.com/rcrowley/freight](https://github.com/rcrowley/freight)
 
 !SLIDE bullets
