@@ -4,7 +4,7 @@
 
 ## Configuration management for busy people
 
-* [rcrowley.org/talks/sf-python-2011-09-14/](http://rcrowley.org/talks/sf-python-2011-09-14/)
+* [rcrowley.org/talks/rubyconf-2011/](http://rcrowley.org/talks/rubyconf-2011/)
 
 !SLIDE bullets
 
@@ -146,6 +146,21 @@ Common commands: list, create, show, diff, apply, destroy, git
 
 !SLIDE bullets
 
+* `sudo gem install mysql2`
+* Good idea.
+
+!SLIDE bullets
+
+* `bundle install --path vendor/bundle`
+* Bad idea.
+
+!SLIDE bullets
+
+* `bundle install --system`
+* If you must.
+
+!SLIDE bullets
+
 # Workflow
 
 ## Blueprints
@@ -243,6 +258,77 @@ Common commands: list, create, show, diff, apply, destroy, git
  }
 }</pre>
 
+!SLIDE bullets smaller
+
+<pre>{
+ "packages": {
+  "apt": {
+   "libc6-dev": ["2.13-0ubuntu13"],
+   "libruby1.8": ["1.8.7.302-2"],
+   "libruby1.8-dev": ["1.8.7.302-2"],
+   "ruby1.8": ["1.8.7.302-2"],
+   "ruby1.8-dev": ["1.8.7.302-2"],
+   "ruby": ["4.5"],
+   "ruby-dev": ["4.5"],
+   "rubygems1.8": ["1.3.7-3"]
+  },
+  "rubygems1.8": {
+   "mysql2": ["0.3.7"],
+   "rack": ["1.3.3"],
+   "sinatra": ["1.2.1", "1.2.6"],
+   "tilt": ["1.3.3"]
+  }
+ },
+ "sources": {
+  "/usr/local": "0b53de6a4fd7fcc3d029a7c08c0279842c1f1cb3.tar"
+ }
+}</pre>
+
+!SLIDE bullets
+
+# Workflow
+
+## Inspecting blueprints
+
+* `blueprint show-packages foo`
+* Pipeline-friendly format.
+
+!SLIDE bullets
+
+<pre>
+apt libc6-dev 2.13-0ubuntu13
+apt libruby1.8 1.8.7.302-2
+apt libruby1.8-dev 1.8.7.302-2
+apt ruby1.8 1.8.7.302-2
+apt ruby1.8-dev 1.8.7.302-2
+apt ruby 4.5
+apt ruby-dev 4.5
+apt rubygems1.8 1.3.7-3
+rubygems1.8 mysql2 0.3.7
+rubygems1.8 rack 1.3.3
+rubygems1.8 sinatra 1.2.1
+rubygems1.8 sinatra 1.2.6
+rubygems1.8 tilt 1.3.3
+</pre>
+
+!SLIDE bullets
+
+# Workflow
+
+## Inspecting blueprints
+
+* `blueprint show-sources foo`
+* Just like `tar tv` output.
+
+!SLIDE bullets smaller
+
+<pre>
+/usr/local 0b53de6a4fd7fcc3d029a7c08c0279842c1f1cb3.tar
+drwxr-xr-x root/root         0 2011-08-10 23:20 ./
+drwxr-xr-x root/root         0 2011-08-10 21:29 ./share/
+-rw-r--r-- root/root        84 2011-08-10 22:48 ./share/foobar
+</pre>
+
 !SLIDE bullets
 
 # Workflow
@@ -254,7 +340,7 @@ Common commands: list, create, show, diff, apply, destroy, git
 
 !SLIDE bullets
 
-<pre><strong>$</strong> cat ~/.blueprintignore
+<pre>
 /etc/apt
 !/etc/apt/sources.list.d
 !/etc/apt/trusted.gpg.d
@@ -267,9 +353,11 @@ Common commands: list, create, show, diff, apply, destroy, git
 !:package:apt/build-essential
 :package:apt/libopts25
 :package:apt/libtspi1
-<strong>$</strong> sudo blueprint create foo
-...
-<strong>$</strong></pre>
+:package:rubygems1.8/tilt
+
+:source:/usr/local/share/foobar
+!:source:/opt
+</pre>
 
 !SLIDE bullets
 
@@ -279,6 +367,18 @@ Common commands: list, create, show, diff, apply, destroy, git
 
 * `blueprint push foo`
 * `blueprint pull foo`
+
+!SLIDE bullets smaller
+
+<pre><strong>$</strong> blueprint push foo
+# [blueprint] completed - blueprint URL:
+https://devstructure.com/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcd
+efghijklmnopqrstuvwxyz_-/foo
+<strong>$</strong> blueprint pull https://devstructure.com/0123456789ABCDEFGHIJKLM
+NOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-/foo
+# [blueprint] completed - blueprint stored locally and ready for
+use
+<strong>$</strong></pre>
 
 !SLIDE bullets
 
@@ -310,6 +410,26 @@ Common commands: list, create, show, diff, apply, destroy, git
 
 * `blueprint show -S foo`
 * Run `foo.sh` without installing Blueprint.
+
+!SLIDE bullets smaller
+
+<pre class="sh_Sh sh_sourceCode">
+mkdir -p "/etc/apt/sources.list.d"
+cat &gt;"/etc/apt/sources.list.d/devstructure.list" &lt;&lt;EOF
+deb http://packages.devstructure.com natty main
+EOF
+export APT_LISTBUGS_FRONTEND="none"
+export APT_LISTCHANGES_FRONTEND="none"
+export DEBIAN_FRONTEND="noninteractive"
+apt-get -q update
+[ "$(dpkg-query -f'${Version}\n' -W openssh-server)" \
+	= "1:5.8p1-1ubuntu3" ] || {
+	apt-get -y -q -o DPkg::Options::=--force-confold install \
+		openssh-server=1:5.8p1-1ubuntu3
+	SERVICE_sysvinit_ssh=1
+}
+[ -n "$SERVICE_sysvinit_ssh" ] &amp;&amp; /etc/init.d/ssh restart
+</pre>
 
 !SLIDE bullets
 
@@ -420,5 +540,5 @@ sh "$(ls)"</pre>
 
 # Thank you
 
-* [rcrowley.org/talks/sf-python-2011-09-14/](http://rcrowley.org/talks/sf-python-2011-09-14/)
+* [rcrowley.org/talks/rubyconf-2011/](http://rcrowley.org/talks/rubyconf-2011/)
 * <richard@devstructure.com> or [@rcrowley](https://twitter.com/rcrowley)
